@@ -1,0 +1,44 @@
+pkgname=st-hailey
+_pkgname=st
+pkgver=0.8.3.r13.g475a0a3
+pkgrel=1
+pkgdesc='A simple virtual terminal emulator for X.'
+url="https://st.suckless.org"
+arch=('i686' 'x86_64' 'armv7h')
+license=('MIT')
+options=(zipman)
+depends=('libxft' 'ttf-ibm-plex' 'xorg-server' 'scroll-hailey')
+makedepends=('git')
+provides=('st')
+conflicts=('st')
+url='https://st.suckless.org'
+source=(st.desktop
+	git://git.suckless.org/st
+	config.h)
+md5sums=('b5ff764e52a6391baeff0fffc6d9b531'
+         'SKIP'
+         'SKIP')
+pkgver() {
+    cd $_pkgname
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd $_pkgname
+  if [[ -f "$srcdir/config.h" ]]; then
+    cp -fv "$srcdir/config.h" config.h
+  fi
+}
+
+build() {
+  cd $_pkgname
+  make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
+}
+
+package() {
+  cd $_pkgname
+  make PREFIX=/usr DESTDIR="$pkgdir" install
+  install -m644 -D LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -m644 -D README "$pkgdir/usr/share/doc/$pkgname/README"
+  install -m644 -D ../st.desktop "$pkgdir/usr/share/applications/st.desktop"
+}

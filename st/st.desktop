@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=St
+Comment=Dynamic window manager
+Exec=st
+Icon=utilities-terminal
