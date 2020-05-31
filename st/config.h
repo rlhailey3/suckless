@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "IBM Plex Mono:pixelsize=18:antialias=true:autohint=true";
-static int borderpx = 2;
+static int borderpx = 20;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -40,6 +40,9 @@ wchar_t *worddelimiters = L" ";
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
 
+/* allow certain non-interactive (insecure) window operations such as:
+       setting the clipboard text */
+int allowwindowops = 0;
 /* alt screens */
 int allowaltscreen = 1;
 
@@ -116,6 +119,8 @@ static const char *colorname[] = {
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
 	"#555555",
+	"#dcdccc",
+	"#3f3f3f"
 };
 
 
@@ -123,8 +128,8 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
 static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
@@ -135,7 +140,7 @@ static unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 6;
 
 /*
  * Default columns and rows numbers
