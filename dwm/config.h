@@ -66,8 +66,8 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *brightupcmd[] = { "xbacklight", "-inc", "10", NULL };
 static const char *brightdowncmd[] = { "xbacklight", "-dec", "10", NULL };
 static const char *volumemutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
-static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
-static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *micmutecmd[] = { "amixer", "set", "Capture", "toggle", NULL };
 
 static Key keys[] = {
