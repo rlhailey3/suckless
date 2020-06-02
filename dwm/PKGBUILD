@@ -15,10 +15,12 @@ conflicts=('dwm')
 url='https://dwm.suckless.org'
 source=(dwm.desktop
         "$_pkgname::git+http://git.suckless.org/dwm"
-        config.h)
+        config.h
+        gap_patch.diff)
 md5sums=('939f403a71b6e85261d09fc3412269ee'
-         'SKIP'
-         'SKIP') # so you can customize config.h
+         'SKIP' # Skip as git source may change
+         'SKIP' # Skip check so config can be customized
+         'a2d4870f7e1ed69871f3f1c44cfb85df')
 
 pkgver(){
   cd $_pkgname
@@ -30,6 +32,8 @@ prepare() {
   if [[ -f "$srcdir/config.h" ]]; then
     cp -fv "$srcdir/config.h" config.h
   fi
+  cp -fv "$srcdir/gap_patch.diff" gap_patch.diff
+  git apply gap_patch.diff
 }
 
 build() {
